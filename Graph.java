@@ -40,31 +40,42 @@ public class Graph {
         
         this.AdjList.get(sourceIndex).add(this.NodeArray.get(dIndex));//adds Nodes to adjacency lists
         this.ReverseAdjList.get(dIndex).add(this.NodeArray.get(sourceIndex));
-        //TODO actually change the fucking in and out degrees and ranks of Nodes when adding edges. Probably in its own function.
+
         this.UpdateDegrees(sourceNode);
         this.UpdateDegrees(dNode);
+        this.UpdatePageRank(sourceNode);
+        this.UpdatePageRank(dNode);
     }
 
     private void UpdateDegrees(Node n){
-        //figure out what the degree should be with the current edges and then use setters to change values for the passed node
+        int index = n.getIndex();
+        n.setOutDegree(this.AdjList.get(index).size());
+        n.setInDegree(this.ReverseAdjList.get(index).size());
+    }
+
+    private void UpdatePageRank(Node n){
+        //TODO FOR A LATER PART OF THE PROJECT
+        //-1 is a placeholder
+        int rank = -1;
+        n.setPageRank(rank);
     }
 
 
     public String toString(){
-        //TODO idk dawg something about this is super broken but I'm dealing with the other thing first
         String finalString = "";
         for(int i = 0; i < this.NodeArray.size(); i++){
             if(this.AdjList.get(i) != null){
                 Node currentNode = this.NodeArray.get(i);
-                finalString += "Vertex " + currentNode.getVertexID() + 
-                ": rank = " + currentNode.getRank() + 
-                ", out-degree = " + currentNode.getOutDegree() +
-                "\nEdges from " + currentNode.getVertexID() + "to: ";
-                for(int j = 0; j < this.AdjList.get(i).size(); i++){
+                finalString += currentNode.toString();
+                finalString += "\nEdges from " + currentNode.getVertexID() + " to: ";
+                for(int j = 0; j < this.AdjList.get(i).size(); j++){
                     Node n = this.AdjList.get(i).get(j);
                     finalString += n.getVertexID();
+                    if (j != this.AdjList.get(i).size() - 1){
+                        finalString += ", ";
+                    }
                 }
-
+                finalString += "\n\n";
             }
         }
         return finalString;

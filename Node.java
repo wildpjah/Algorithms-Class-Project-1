@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 public class Node {
     private int vertexID = -1;
     private double pageRank = 0.0;
@@ -13,7 +14,7 @@ public class Node {
     public int getIndex(){
         return this.index;
     }
-    public double getRank(){
+    public double getPageRank(){
         return this.pageRank;
     }
     public int getVertexID(){
@@ -27,17 +28,29 @@ public class Node {
     public void setIndex(int index){
         this.index = index;
     }
-    public void setvertexID(int vertexID){
+    public void setVertexID(int vertexID){
         this.vertexID = vertexID;
     }
-    public void setpageRank(int pageRank){
+    public void setPageRank(int pageRank){
         this.pageRank = pageRank;
     }
-    public void setoutDegree(int outDegree){
+    public void setOutDegree(int outDegree){
         this.outDegree = outDegree;
     }
-    public void setinDegree(int inDegree){
+    public void setInDegree(int inDegree){
         this.inDegree = inDegree;
+    }
+
+    //other methods
+    public String toString(){
+        String finalString = "";
+        DecimalFormat format = new DecimalFormat("0.#");
+        String pageRank = format.format(this.pageRank);
+
+        finalString += "Vertex " + this.getVertexID() + 
+                ": rank = " + pageRank + 
+                ", out-degree = " + this.getOutDegree();
+        return finalString;
     }
     
 }
