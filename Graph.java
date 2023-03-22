@@ -63,15 +63,16 @@ public class Graph {
 
     public String toString(){
         String finalString = "";
-        for(int i = 0; i < this.NodeArray.size(); i++){
-            if(this.AdjList.get(i) != null){
-                Node currentNode = this.NodeArray.get(i);
+        for(int i : this.NameToIndex.keySet()){
+            int currIndex = this.NameToIndex.get(i);
+            if(this.AdjList.get(currIndex) != null){
+                Node currentNode = this.NodeArray.get(currIndex);
                 finalString += currentNode.toString();
                 finalString += "\nEdges from " + currentNode.getVertexID() + " to: ";
-                for(int j = 0; j < this.AdjList.get(i).size(); j++){
-                    Node n = this.AdjList.get(i).get(j);
+                for(int j = 0; j < this.AdjList.get(currIndex).size(); j++){
+                    Node n = this.AdjList.get(currIndex).get(j);
                     finalString += n.getVertexID();
-                    if (j != this.AdjList.get(i).size() - 1){
+                    if (j != this.AdjList.get(currIndex).size() - 1){
                         finalString += ", ";
                     }
                 }
